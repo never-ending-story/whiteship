@@ -35,7 +35,8 @@ WORA: Write Once Run Anywhere
 
 
 
-<img src="/Users/kimnayeon/Desktop/스크린샷 2021-07-08 오후 3.14.42.png" style="zoom:45%;" />
+<img width="535" alt="스크린샷 2021-07-08 오후 3 14 42" src="https://user-images.githubusercontent.com/65011131/124962482-a4692f00-e059-11eb-9a79-030b8c6a0b1e.png">
+
 
 ##### ClassLoader Subsystem
 
