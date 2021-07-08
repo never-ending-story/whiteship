@@ -20,7 +20,8 @@
 
     - Abstract Syntax Tree? 추상 구문 트리(소스 코드의 추상 구문 구조의 트리), 컴파일러에 널리 사용되는 자료 구조
 
-      <img src="/Users/kimnayeon/Desktop/스크린샷 2021-07-08 오후 5.47.00.png" alt="추상 구문 트리 이미지" style="zoom:50%;" />
+   <img width="411" alt="스크린샷 2021-07-08 오후 5 47 00" src="https://user-images.githubusercontent.com/65011131/124962808-07f35c80-e05a-11eb-8ef3-c0983caae509.png">
+
 
 - **Enter**
 
@@ -34,7 +35,8 @@
 
       아래 예시: C 언어 프로그램의 심볼 테이블
 
-      <img src="/Users/kimnayeon/Desktop/스크린샷 2021-07-08 오후 6.02.37.png" style="zoom:50%;" />
+     <img width="411" alt="스크린샷 2021-07-08 오후 6 02 37" src="https://user-images.githubusercontent.com/65011131/124962835-0f1a6a80-e05a-11eb-96f3-3e32d2acb600.png">
+
 
 - **Precess annotations**
 
