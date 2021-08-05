@@ -1,0 +1,17 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.2'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.6.1'
+    implementation group: 'org.kohsuke', name: 'github-api', version: '1.116'
+}
