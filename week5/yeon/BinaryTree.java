@@ -29,6 +29,10 @@ public class BinaryTree {
         System.out.println();
     }
 
+    /**
+     * 전위 순회로 구현
+     * root -> left -> right 
+     */
     public void dfs(Node root) {
         Stack<Node> stack = new Stack<>();
         stack.push(root);
