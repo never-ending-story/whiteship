@@ -238,7 +238,7 @@ class Child extends Parent {
 
 - static 메소드는 instance가 아닌 변수 type에 따라 호출된다. -> 메소드 호출이 컴파일타임에 정해진다.
 - instance 메소드는 변수 type이 아닌 instance의 타입에 따라 호출된다. -> 메소드 호출이 런타임에 정해진다.
-- 자식의 instance 메소드는 부모의 static 메소드를 오버라이딩 할 수 없고, 자식의 static 메소드는 부모의 static 메소드를 숨길 수 없다. 컴파일 에러가 발생한다.
+- 자식의 instance 메소드는 부모의 static 메소드를 오버라이딩 할 수 없고, 자식의 static 메소드는 부모의 instance 메소드를 숨길 수 없다. 컴파일 에러가 발생한다.
 
 ```java
 public class Parent {
