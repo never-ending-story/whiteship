@@ -128,6 +128,115 @@ public interface HandlerInterceptor {
 
 - 우리가 프로젝트에서 인터셉터를 구현할 때 `preHandle()`, `postHandle()`, `afterCompletion()`을 모두 구현하지 않아도 되었던 건, 바로 이녀석들이 default method 였기 때문입니다.
 
+- 예전엔 `interface`를 구현한 추상클래스가 있었습니다.
+
+```java
+interface I {
+    void a();
+    void b();
+    void c();
+}
+
+// 위의 인터페이스를 구현한 추상클래스
+abstract ABC implements I {
+    @Override
+    public void a() {
+        // 내부코드를 작성하지 않고 구현하였음.
+    }
+
+    @Override
+    public void b() {
+        // 내부코드를 작성하지 않고 구현하였음.
+    }
+    
+    @Override
+    public void c() {
+        // 내부코드를 작성하지 않고 구현하였음.
+    }
+}
+
+// 클래스 A, B, C는 추상클래스 ABC를 상속받아서,
+// 인터페이스 I에 정의된 a(), b(), c()를 모두 구현하지않고 필요한 부분만 구현합니다.
+class A extends ABC {
+    @Override
+    public void a() {
+        // 구체적인 코드를 작성하여 구현
+    }
+}
+
+class B extends ABC {
+    @Override
+    public void b() {
+        // 구체적인 코드를 작성하여 구현
+    }
+}
+
+class C extends ABC {
+    @Override
+    public void c() {
+        // 구체적인 코드를 작성하여 구현
+    }
+}
+```
+
+- 그런데 이런 방식을 사용하면 A, B, C 클래스는 더 이상 상속을 받을 수 없습니다.
+- 그래서 default 메서드를 이용하여 이 문제를 해결할 수 있습니다.
+
+```java
+interface I {
+    default void a();
+    default void b();
+    default void c();
+}
+
+// 중간에 빈 내부 코드를 구현한 추상클래스를 없애도 필요한 메소드만 오버라이딩 할 수 있습니다.
+class A implements I {
+    @Override
+    public void a() {
+        // 구체적인 코드를 작성하여 구현
+    }
+}
+
+class B implements I {
+    @Override
+    public void b() {
+        // 구체적인 코드를 작성하여 구현
+    }
+}
+
+class C implements I {
+    @Override
+    public void c() {
+        // 구체적인 코드를 작성하여 구현
+    }
+}
+```
+
+- `WebMvcConfigurer`클래스가 이런 방식이 사용되었다.
+
+```java
+@Deprecated
+public abstract class WebMvcConfigurerAdapter implements WebMvcConfigurer {
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+    }
+
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+    }
+
+    // ...
+
+public interface WebMvcConfigurer {
+    default void configurePathMatch(PathMatchConfigurer configurer) {
+    }
+
+    default void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+    }
+
+    // ...
+
+```
+
+- `WebMvcConfigurer`인터페이스를 구현한 추상클래스 `WebMvcConfigurerAdapter`는 `Deprecated`되었습니다.
 ### 6. 인터페이스의 static 메소드, 자바 8
 
 - 자바 8에서 default 메서드와 함께 static 메서드도 추가되었습니다.
