@@ -99,9 +99,9 @@ class Fruit {
 }
 
 class Company {
-    public static final Company GOOGLE = new Fruit();
-    public static final Company APPLE = new Fruit();
-    public static final Company ORACLE = new Fruit();
+    public static final Company GOOGLE = new Company();
+    public static final Company APPLE = new Company();
+    public static final Company ORACLE = new Company();
 }
 ```
 ```
