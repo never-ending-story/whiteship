@@ -76,34 +76,33 @@
 import java.io.*;
 // 키보드 --> 파일 
 class C {
-	InputStream is = System.in;
-	FileOutputStream os;
+    InputStream is = System.in;
+    FileOutputStream os;
     C(){
-		try{
-			os = new FileOutputStream("/Users/shion/desktop/C.txt"); 
-		}catch(FileNotFoundException fe){}
+	try{
+	    os = new FileOutputStream("/Users/shion/desktop/C.txt"); 
+	}catch(FileNotFoundException fe){}
+    }
+    void m(){
+	byte[] b = new byte[8];
+	try{
+	    while(true){
+		int total = is.read(b);
+		os.write(b, 0, total); 
+		os.flush();
+	    }
+	}catch(IOException ie){
+	}finally{
+	    try{
+		is.close();
+		os.close();
+	    }catch(IOException ie){}
 	}
-	void m(){
-		byte[] b = new byte[8];
-		try{
-			while(true){
-				int total = is.read(b);
-				os.write(b, 0, total); 
-				os.flush();
-			}
-		}catch(IOException ie){
-		}finally{
-			try{
-				is.close();
-				os.close();
-			}catch(IOException ie){}
-		}
-	}
-	public static void main(String[] args) 
-	{
-		C c = new C();
-		c.m();
-	}
+    }
+    public static void main(String[] args) {
+	C c = new C();
+	c.m();
+    }
 }
 ```
 
@@ -120,41 +119,39 @@ class C {
 ```java
 import java.io.*;
 //파일 -> 모니터/파일
-class D 
-{
-	FileInputStream is;
-	OutputStream os = System.out; //모니터
-	FileOutputStream fos; //파일 
+class D {
+    FileInputStream is;
+    OutputStream os = System.out; //모니터
+    FileOutputStream fos; //파일 
     D(){
-		try{
-			is = new FileInputStream("/Users/shion/desktop/C.txt"); // C.txt 파일을 읽는다.
-			fos = new FileOutputStream("/Users/shion/desktop/D.txt"); // D.txt 파일에 출력하기 위한 OutputStream
-		}catch(FileNotFoundException fe){}
+	try{
+	    is = new FileInputStream("/Users/shion/desktop/C.txt"); // C.txt 파일을 읽는다.
+	    fos = new FileOutputStream("/Users/shion/desktop/D.txt"); // D.txt 파일에 출력하기 위한 OutputStream
+	}catch(FileNotFoundException fe){}
+    }
+    void m(){
+	byte[] b = new byte[8];
+	int total = 0;
+	try{
+	    while((total = is.read(b)) != -1){
+		fos.write(b, 0, total); 
+		os.write(b, 0, total);
+		fos.flush();
+		os.flush();
+	    }
+	}catch(IOException ie){
+	}finally{
+	    try{
+		is.close();
+		os.close();
+		fos.close();
+	    }catch(IOException ie){}
 	}
-	void m(){
-		byte[] b = new byte[8];
-		int total = 0;
-		try{
-			while((total = is.read(b)) != -1){
-				fos.write(b, 0, total); 
-				os.write(b, 0, total);
-				fos.flush();
-				os.flush();
-			}
-		}catch(IOException ie){
-		}finally{
-			try{
-				is.close();
-				os.close();
-				fos.close();
-			}catch(IOException ie){}
-		}
-	}
-	public static void main(String[] args) 
-	{
-		D d = new D();
-		d.m();
-	}
+    }
+    public static void main(String[] args) {
+	D d = new D();
+	d.m();
+    }
 }
 ```
 - 실행 -`C.txt` 파일의 내용이 콘솔창에 출력되었음
@@ -170,43 +167,41 @@ class D
 ```java
 import java.io.*;
 //파일 -> 모니터/파일
-class DD 
-{
-	FileInputStream is;
-	OutputStream os = System.out; //모니터
-	FileOutputStream fos; //파일
-	String fname = "IOCopy.jpg";
+class DD {
+    FileInputStream is;
+    OutputStream os = System.out; //모니터
+    FileOutputStream fos; //파일
+    String fname = "IOCopy.jpg";
     DD(){
-		try{
-			is = new FileInputStream("/Users/shion/desktop/IO.jpg"); //바탕화면에 있는 IO.jpg라는 파일을 읽어서
-			fos = new FileOutputStream("/Users/shion/desktop/" + fname); //바탕화면에 IOCopy.jpg 이름으로 복사할 것임
-		}catch(FileNotFoundException fe){}
-	}
-	void m(){
-		byte[] b = new byte[8];
-		int total = 0;
-		try{
-			while((total = is.read(b)) != -1){
-				fos.write(b, 0, total); 
-				//os.write(b, 0, total);
-				fos.flush();
-				//os.flush();
-			}
-			System.out.println("파일을 복사했습니다("+fname+")");
-		}catch(IOException ie){
-		}finally{
-			try{
-				is.close();
-				os.close();
-				fos.close();
-			}catch(IOException ie){}
-		}
-	}
-	public static void main(String[] args) 
-	{
-		DD d = new DD();
-		d.m();
-	}
+	try{
+	    is = new FileInputStream("/Users/shion/desktop/IO.jpg"); //바탕화면에 있는 IO.jpg라는 파일을 읽어서
+	    fos = new FileOutputStream("/Users/shion/desktop/" + fname); //바탕화면에 IOCopy.jpg 이름으로 복사할 것임
+	}catch(FileNotFoundException fe){}
+    }
+    void m(){
+	byte[] b = new byte[8];
+	int total = 0;
+	try{
+	    while((total = is.read(b)) != -1){
+		fos.write(b, 0, total); 
+		//os.write(b, 0, total);
+		fos.flush();
+		//os.flush();
+	    }
+	    System.out.println("파일을 복사했습니다("+fname+")");
+	}catch(IOException ie){
+	}finally{
+	    try{
+		is.close();
+		os.close();
+		fos.close();
+	    }catch(IOException ie){}
+        }
+    }
+    public static void main(String[] args) {
+	DD d = new DD();
+	d.m();
+    }
 }
 ```
 - 이 파일을 복사할 것임
@@ -228,47 +223,45 @@ import java.io.*;
 
 //파일 -> 파일 
 class A2 {
-	String fName1 = "A2.java";
-	String fName2 = "A2_copy.txt";
-	FileInputStream fis; //Node 
-	FileOutputStream fos; //Node 
-	BufferedInputStream bis; //Filter 
-	BufferedOutputStream bos; //Filter 
-	A2(){
-		try{
-			fis = new FileInputStream("/Users/shion/Desktop/" + fName1); // A2.java(현재파일) 파일내용을 읽어서
-			fos = new FileOutputStream("/Users/shion/Desktop/" + fName2); // A2_copy.txt 파일에 출력해 넣을 것임
-			bis = new BufferedInputStream(fis, 1024); // 버퍼를 사용, 사이즈는 1024바이트
-		    bos = new BufferedOutputStream(fos, 1024);
-		}catch(FileNotFoundException fe){
-		}
+    String fName1 = "A2.java";
+    String fName2 = "A2_copy.txt";
+    FileInputStream fis; //Node 
+    FileOutputStream fos; //Node 
+    BufferedInputStream bis; //Filter 
+    BufferedOutputStream bos; //Filter 
+    A2(){
+	try{
+	    fis = new FileInputStream("/Users/shion/Desktop/" + fName1); // A2.java(현재파일) 파일내용을 읽어서
+      	    fos = new FileOutputStream("/Users/shion/Desktop/" + fName2); // A2_copy.txt 파일에 출력해 넣을 것임
+	    bis = new BufferedInputStream(fis, 1024); // 버퍼를 사용, 사이즈는 1024바이트
+            bos = new BufferedOutputStream(fos, 1024);
+	}catch(FileNotFoundException fe){}
+    }
+    void copy(){
+	int i = 0;
+	long t = 0;
+	byte bs[] = new byte[256];
+	try{
+	    while((i = bis.read(bs)) != -1){
+		bos.write(bs, 0, i);
+		t += i;
+	    }
+	    bos.flush();
+	    System.out.println("복사성공!! ("+fName2+" "+t+"bytes)");
+	}catch(IOException ie){
+	}finally{
+	    try{
+		bis.close();
+		bos.close();
+		fis.close();
+		fos.close();
+	    }catch(IOException ie){}
 	}
-	void copy(){
-		int i = 0;
-	    long t = 0;
-		byte bs[] = new byte[256];
-		try{
-			while((i = bis.read(bs)) != -1){
-				bos.write(bs, 0, i);
-				t += i;
-			}
-			bos.flush();
-			System.out.println("복사성공!! ("+fName2+" "+t+"bytes)");
-		}catch(IOException ie){
-		}finally{
-			try{
-				bis.close();
-				bos.close();
-				fis.close();
-				fos.close();
-			}catch(IOException ie){
-			}
-		}
-	}
-	public static void main(String[] args) {
-		A2 a = new A2();
-		a.copy();
-	}
+    }
+    public static void main(String[] args) {
+	A2 a = new A2();
+	a.copy();
+    }
 }
 ```
 
