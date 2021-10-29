@@ -504,7 +504,67 @@ public class Main {
 ### 결과 : 
 [aaa, bbb, ccc]
 
-- Q. 메소드가 두개 이상인 인터페이스에 함수형 표현식인 람다 표현식을 어떻게 대응 시킬 수 있을까요?
-  
-참고 : https://www.inflearn.com/course/the-java-java8/dashboard
-        System.out.println(Arrays.toString(names));
+### 람다를 통한 중복 제거
+
+```java
+
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+public int sumAllOverThree(List<Integer> numbers) {
+    int total = 0;
+    for (Integer number : numbers) {
+        if (number >= 3) {
+            total += number;
+        }
+    }
+    return total;
+}
+
+public int sumAll(List<Integer> numbers) {
+    int total = 0;
+    for (int number : numbers) {
+        total += number;
+    }
+    return total;
+}
+
+public int sumAllEven(List<Integer> numbers) {
+    int total = 0;
+    for (int number : numbers) {
+        if (number % 2 == 0) {
+            total += number;
+        }
+    }
+    return total;
+}
+```
+- `if`문 이외에 중복되는 코드가 많으니 함수형 인터페이스를 만들고 람다를 통해 중복을 제거해보자.
+
+```java
+interface Conditional {
+    boolean test(Integer number);
+}
+
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+public int sum(List<Integer> numbers, Conditional c) {
+    int total = 0;
+    for (Integer number : numbers) {
+        if (c.test(number)) {
+            total += number;
+        }
+    }
+    return total;
+}
+
+int sumAll = sum(numbers, number -> true);
+int sumAllEven = sum(numbers, number -> number % 2 == 0);
+int sumAllOverThree = sum(numbers, number -> number >= 3);
+```
+
+- 3개의 메서드를 `sum`으로 통일하고 함수형 인터페이스 `Conditional`을 매개변수로 받아 `if`문에서 사용하여 중복을 제거하였다.
+- `sum`을 호출할 때 람다를 통해 `if`문에 들어갈 함수를 구현해서 넘겨주었다.
+
+### 참고 : 
+- https://www.inflearn.com/course/the-java-java8/dashboard 
+- 코드스쿼드 자료
